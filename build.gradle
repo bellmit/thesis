@@ -1,0 +1,82 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+
+group = 'com.nikolaj.thesis'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/milestone"}
+    maven{ url "https://repo.eclipse.org/content/repositories/paho-releases/"}
+}
+
+
+ext {
+	springCloudVersion = 'Finchley.M8'
+}
+
+dependencies {
+
+	compile( 'org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.boot:spring-boot-starter-web'){
+		exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+	}
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile('org.springframework.boot:spring-boot-starter-integration')
+	compile("org.springframework.integration:spring-integration-feed")
+	compile("org.springframework.integration:spring-integration-mqtt")
+	compile("org.springframework.integration:spring-integration-stream")
+	compile group: 'org.eclipse.paho', name: 'org.eclipse.paho.client.mqttv3', version: '1.2.0'
+	compile("org.springframework.boot:spring-boot-starter-security")
+	compile 'org.springframework.security:spring-security-web:5.0.4.RELEASE'
+	compile 'io.jsonwebtoken:jjwt:0.9.0'
+	compile ('org.springframework.boot:spring-boot-starter-log4j2')
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.0.1.RELEASE'
+	compile 'com.auth0:mvc-auth-commons:1.+'
+    compile 'org.influxdb:influxdb-java:2.13'
+	compile 'com.github.scribejava:scribejava-apis:5.5.0'
+	compile 'com.github.scribejava:scribejava:5.5.0'
+	compileOnly('org.projectlombok:lombok:1.16.20')
+	compile('org.liquibase:liquibase-core')
+	runtime('org.postgresql:postgresql:42.2.1')
+	runtime('org.springframework.boot:spring-boot-devtools')
+	compile('org.hibernate:hibernate-java8:5.1.0.Final')
+	runtime 'org.springframework.boot:spring-boot-starter-tomcat:1.5.6.RELEASE'
+	runtime 'org.springframework.security:spring-security-taglibs:4.2.3.RELEASE'
+	runtime 'org.apache.tomcat.embed:tomcat-embed-jasper:8.5.20'
+	runtime 'javax.servlet:jstl:1.2'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+	testCompile('junit:junit:4.12')
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+	compile 'com.opencsv:opencsv:4.2'
+	// https://mvnrepository.com/artifact/net.sf.supercsv/super-csv
+	compile group: 'net.sf.supercsv', name: 'super-csv', version: '2.4.0'
+
+}
+
+configurations {
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
+
+
+
