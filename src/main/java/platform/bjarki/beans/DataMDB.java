@@ -29,7 +29,8 @@ public class DataMDB extends MessageBean {
     protected String messageReceived(String message){
 //        logger.info("eyeTracker raw queue instance, message: " + message);
 
-        return dataService.saveDataToDB(message);
+//        return dataService.saveDataToDB(message);
+        return dataService.saveDataToInflux(message);
 
     }
 
